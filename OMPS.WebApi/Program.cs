@@ -1,4 +1,3 @@
-
 using OMPS.PresentationKatmani;
 
 namespace OMPS.WebApi
@@ -13,23 +12,24 @@ namespace OMPS.WebApi
 
             builder.Services.AddControllers()
                 .AddApplicationPart(typeof(AssemblyReferance).Assembly);// presentation katmanýndaki controllerlarý tanýtmak için
-          
-            
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
 
+
+            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+         
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            //Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
-            }
+                app.UseSwagger();
+                app.UseSwaggerUI();
 
+            }
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
