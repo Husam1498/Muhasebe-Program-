@@ -1,1 +1,2 @@
-# OnlineMuhasebeProgramıServer
+# OnlineMuhasebeProgramı
+<smal>Clean Architecture</small>
