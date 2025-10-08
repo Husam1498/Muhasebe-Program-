@@ -1,0 +1,6 @@
+@OMPS.WebApi_HostAddress = http://localhost:5085
+
+GET {{OMPS.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
