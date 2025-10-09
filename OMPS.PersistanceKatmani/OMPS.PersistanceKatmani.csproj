@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineMuhasebeProgramıServer.ApplicationKatmanı\OMPS.ApplicationKatmanı.csproj" />
     <ProjectReference Include="..\OnlineMuhasebeProgramıServer.DomainKatmani\OMPS.DomainKatmani.csproj" />
   </ItemGroup>
 

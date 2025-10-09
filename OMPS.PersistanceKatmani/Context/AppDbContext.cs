@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using OMPS.DomainKatmani.Abstractions;
 using OMPS.DomainKatmani.AppEntities;
 using OMPS.DomainKatmani.AppEntities.Identity;
 
@@ -13,12 +15,40 @@ namespace OMPS.PersistanceKatmani.Context
         }
         public DbSet<Company> Companies { get; set; }
         public DbSet<AppUserAndCompany> AppUserAndCompanies { get; set; }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+           var entires= ChangeTracker.Entries<Entity>();
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
+            foreach (var entry in entires)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property(e => e.Id)
+                        .CurrentValue = Guid.NewGuid().ToString();
+                    entry.Property(e => e.CreatedDate)
+                       .CurrentValue = DateTime.Now;
+                  
+                }
+                if(entry.State == EntityState.Modified)
+                {
+                    entry.Property(e => e.UpdatedDate)
+                     .CurrentValue = DateTime.Now;
+                }
+            }
 
-        //    base.OnModelCreating(builder);
-        //}
+            return base.SaveChangesAsync(cancellationToken);
+        }
+        public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+        {
 
+            public AppDbContext CreateDbContext(string[] args)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder();
+                var connectionString = "Data Source=DESKTOP-S32BE3K; Initial Catalog= MuhasebeProgramiAnaDb;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+                optionsBuilder.UseSqlServer(connectionString);
+
+                return new AppDbContext(optionsBuilder.Options);
+            }
+        }
     }
 }

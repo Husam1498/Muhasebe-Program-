@@ -1,8 +1,13 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using OMPS.PersistanceKatmani.Context;
-using OMPS.PresentationKatmani;
+#region Usings
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.OpenApi.Models;
+    using OMPS.ApplicationKatmaný.Services.AppServices;
+    using OMPS.DomainKatmani.AppEntities.Identity;
+    using OMPS.PersistanceKatmani.Context;
+    using OMPS.PersistanceKatmani.Services.AppServices;
+#endregion
+
 
 namespace OMPS.WebApi
 {
@@ -12,17 +17,39 @@ namespace OMPS.WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            //COntroller added
+            #region COntrollers added
             builder.Services.AddControllers()
-                .AddApplicationPart(typeof(AssemblyReferance).Assembly);// presentation katmanýndaki controllerlarý tanýtmak için
+                .AddApplicationPart(typeof(OMPS.PresentationKatmani.AssemblyReferance).Assembly);// presentation katmanýndaki controllerlarý tanýtmak için
+            #endregion
 
-            //Db COntext and identity services added
+            #region Db COntext and identity services added
             builder.Services.AddDbContext<AppDbContext>(opts=>
             {
                 opts.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
 
             });
+                // ýdentity tanýmlama
+                builder.Services.AddIdentity<AppUser,AppRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+            #endregion
+
+            #region Servisler tanýmý
+
+            builder.Services.AddScoped<ICompanyServices,CompanyServices>();
+            #endregion
+
+            #region mediatR services added
+      
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OMPS.ApplicationKatmaný.AssemblyReferance).Assembly));
+            // builder.Services.AddMediatR(typeof(OMPS.ApplicationKatmaný.AssemblyReferance).Assembly));
+            #endregion
+
+            #region AutoMapper services added
+            // builder.Services.AddAutoMapper(typeof(OMPS.PresentationKatmani.AssemblyReferance).Assembly);
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            #endregion
+
+            #region Swager added
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(setup =>
@@ -49,6 +76,7 @@ namespace OMPS.WebApi
                     { jwtSecurityScheme, Array.Empty<string>() }
                 });
             });
+            #endregion
 
             var app = builder.Build();
 
@@ -69,3 +97,4 @@ namespace OMPS.WebApi
         }
     }
 }
+

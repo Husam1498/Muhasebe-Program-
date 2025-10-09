@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OMPS.PresentationKatmani.Abstraction
 {
@@ -6,5 +7,10 @@ namespace OMPS.PresentationKatmani.Abstraction
     [Route("api/[controller]")]
     public abstract class ApiController: ControllerBase
     {
+        protected readonly IMediator _mediator;
+        protected ApiController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
     }
 }
