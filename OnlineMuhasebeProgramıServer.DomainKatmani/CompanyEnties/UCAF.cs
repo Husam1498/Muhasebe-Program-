@@ -18,6 +18,6 @@ namespace OMPS.DomainKatmani.CompanyEnties
         /// bu dosyalamyı kurmak için type değişkeni kurulacak
         /// </summary>
         /// 
-        public string CompanyId { get; set; }
+
     }
 }

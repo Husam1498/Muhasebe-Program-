@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using OMPS.DomainKatmani.Abstractions;
 using OMPS.DomainKatmani.AppEntities;
 
 
@@ -69,6 +70,26 @@ namespace OMPS.PersistanceKatmani.Context
             }
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entires = ChangeTracker.Entries<Entity>();
+
+            foreach (var entry in entires)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property(e => e.CreatedDate)
+                       .CurrentValue = DateTime.Now;
+                }
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property(e => e.UpdatedDate)
+                     .CurrentValue = DateTime.Now;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
     }
 

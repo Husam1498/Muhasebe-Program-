@@ -3,11 +3,15 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.OpenApi.Models;
     using OMPS.ApplicationKatmaný.Services.AppServices;
+using OMPS.ApplicationKatmaný.Services.CompanyServices;
 using OMPS.DomainKatmani;
 using OMPS.DomainKatmani.AppEntities.Identity;
+using OMPS.DomainKatmani.Repository.UCAFRepos;
 using OMPS.PersistanceKatmani;
 using OMPS.PersistanceKatmani.Context;
-    using OMPS.PersistanceKatmani.Services.AppServices;
+using OMPS.PersistanceKatmani.Repositories.UCAFRepository;
+using OMPS.PersistanceKatmani.Services.AppServices;
+using OMPS.PersistanceKatmani.Services.CompanyServices;
 #endregion
 
 
@@ -39,10 +43,14 @@ namespace OMPS.WebApi
 
             builder.Services.AddScoped<ICompanyServices,CompanyServices>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWorks>();
+            builder.Services.AddScoped<IUCAFCommandRepo,UCAFCommandRepository>();
+            builder.Services.AddScoped<IUCAFQueryRepo,UCAFQueryRepository>();
+            builder.Services.AddScoped<IContextService,ContextService>();
+            builder.Services.AddScoped<IUCAFServis,UCAFService>();
             #endregion
 
             #region mediatR services added
-      
+
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OMPS.ApplicationKatmaný.AssemblyReferance).Assembly));
             // builder.Services.AddMediatR(typeof(OMPS.ApplicationKatmaný.AssemblyReferance).Assembly));
             #endregion
