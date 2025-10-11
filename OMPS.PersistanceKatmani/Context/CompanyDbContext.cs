@@ -16,7 +16,7 @@ namespace OMPS.PersistanceKatmani.Context
         private string ConnectionString = "";
         private readonly AppDbContext _appDbContext;
 
-        public CompanyDbContext(string companyId, Company company=null)
+        public CompanyDbContext( Company company=null)
         {
             if (company != null)
             {
@@ -29,7 +29,6 @@ namespace OMPS.PersistanceKatmani.Context
                             $"Trust Server Certificate=True;" +
                             $"Application Intent=ReadWrite;" +
                             $"Multi Subnet Failover=False";
-
                 }
                 else
                 {
@@ -66,7 +65,7 @@ namespace OMPS.PersistanceKatmani.Context
             public CompanyDbContext CreateDbContext(string[] args)
             {
             
-                return new CompanyDbContext("");
+                return new CompanyDbContext();
             }
         }
 

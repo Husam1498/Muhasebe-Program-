@@ -16,4 +16,8 @@
     <Folder Include="Services\CompanyServices\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineMuhasebeProgramıServer.DomainKatmani\OMPS.DomainKatmani.csproj" />
+  </ItemGroup>
+
 </Project>

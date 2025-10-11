@@ -22,12 +22,9 @@ namespace OMPS.PersistanceKatmani.Context
             foreach (var entry in entires)
             {
                 if (entry.State == EntityState.Added)
-                {
-                    entry.Property(e => e.Id)
-                        .CurrentValue = Guid.NewGuid().ToString();
+                {                   
                     entry.Property(e => e.CreatedDate)
                        .CurrentValue = DateTime.Now;
-                  
                 }
                 if(entry.State == EntityState.Modified)
                 {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.CreateCompany;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities;
@@ -8,6 +9,14 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
 {
     public class CompanyServices : ICompanyServices
     {
+        /// <summary>
+        /// name arama
+        /// </summary>
+        private static readonly Func<AppDbContext, string, Task<Company?> > 
+            GetCompanybyNameCompiled = EF.CompileAsyncQuery((AppDbContext context, string name) => 
+                context.Set<Company>()
+                .FirstOrDefault(c => c.Name == name));
+
         private readonly AppDbContext _context;
         private readonly IMapper _ımapper;
         public CompanyServices(AppDbContext context, IMapper ımapper)
@@ -19,10 +28,27 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
         public async Task CreateCompanyAsync(CreateCompayRequest request)
         {
             Company company = _ımapper.Map<Company>(request);
-            //company.Id = Guid.NewGuid().ToString();
             await _context.Set<Company>().AddAsync(company);
             await _context.SaveChangesAsync();
 
+        }
+
+        //şiirket adı ile şirket getir
+        public async Task<Company?> GetCompanyByName(string name)
+        {
+            return await GetCompanybyNameCompiled(_context, name);
+        }
+
+        public async Task MigrateCompanyDatabases()
+        {
+            var companies = await _context.Set<Company>().ToListAsync();
+            foreach (var company in companies)
+            {
+                var db = new CompanyDbContext(company);
+
+                await db.Database.MigrateAsync();
+
+            }
         }
     }
 }

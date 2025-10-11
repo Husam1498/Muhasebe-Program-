@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.CreateCompany;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.MigrateCompanyDatabase;
 using OMPS.PresentationKatmani.Abstraction;
 
 namespace OMPS.PresentationKatmani.Controller
@@ -10,10 +11,19 @@ namespace OMPS.PresentationKatmani.Controller
         public CompanyController(IMediator mediator) : base(mediator)
         {
         }
+
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateCompany(CreateCompayRequest request)
         { 
             CreateCompanyResponse response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> MigrateCompanyDatabases()
+        {
+            MCDRequest requst = new();
+            MCDResponse response = await _mediator.Send(requst);
             return Ok(response);
         }
 
