@@ -3,8 +3,10 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.OpenApi.Models;
     using OMPS.ApplicationKatmaný.Services.AppServices;
-    using OMPS.DomainKatmani.AppEntities.Identity;
-    using OMPS.PersistanceKatmani.Context;
+using OMPS.DomainKatmani;
+using OMPS.DomainKatmani.AppEntities.Identity;
+using OMPS.PersistanceKatmani;
+using OMPS.PersistanceKatmani.Context;
     using OMPS.PersistanceKatmani.Services.AppServices;
 #endregion
 
@@ -36,6 +38,7 @@ namespace OMPS.WebApi
             #region Servisler tanýmý
 
             builder.Services.AddScoped<ICompanyServices,CompanyServices>();
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWorks>();
             #endregion
 
             #region mediatR services added
