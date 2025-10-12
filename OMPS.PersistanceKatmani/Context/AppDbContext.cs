@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using OMPS.DomainKatmani.Abstractions;
@@ -15,6 +16,13 @@ namespace OMPS.PersistanceKatmani.Context
         }
         public DbSet<Company> Companies { get; set; }
         public DbSet<AppUserAndCompany> AppUserAndCompanies { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Ignore<IdentityUserLogin<string>>();
+            builder.Ignore<IdentityUserRole<string>>();
+            builder.Ignore<IdentityUserClaim<string>>();
+            builder.Ignore<IdentityUserToken<string>>();
+        }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
            var entires= ChangeTracker.Entries<Entity>();
