@@ -5,11 +5,7 @@ using OMPS.DomainKatmani;
 using OMPS.DomainKatmani.CompanyEnties;
 using OMPS.DomainKatmani.Repository.UCAFRepos;
 using OMPS.PersistanceKatmani.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OMPS.PersistanceKatmani.Services.CompanyServices
 {

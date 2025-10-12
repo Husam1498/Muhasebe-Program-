@@ -1,19 +1,4 @@
-#region Usings
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.OpenApi.Models;
-    using OMPS.ApplicationKatmaný.Services.AppServices;
-using OMPS.ApplicationKatmaný.Services.CompanyServices;
-using OMPS.DomainKatmani;
-using OMPS.DomainKatmani.AppEntities.Identity;
-using OMPS.DomainKatmani.Repository.UCAFRepos;
-using OMPS.PersistanceKatmani;
-using OMPS.PersistanceKatmani.Context;
-using OMPS.PersistanceKatmani.Repositories.UCAFRepository;
-using OMPS.PersistanceKatmani.Services.AppServices;
-using OMPS.PersistanceKatmani.Services.CompanyServices;
-#endregion
-
+using OMPS.WebApi.Configuration;
 
 namespace OMPS.WebApi
 {
@@ -23,70 +8,9 @@ namespace OMPS.WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            #region COntrollers added
-            builder.Services.AddControllers()
-                .AddApplicationPart(typeof(OMPS.PresentationKatmani.AssemblyReferance).Assembly);// presentation katmanýndaki controllerlarý tanýtmak için
-            #endregion
-
-            #region Db COntext and identity services added
-            builder.Services.AddDbContext<AppDbContext>(opts=>
-            {
-                opts.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
-
-            });
-                // ýdentity tanýmlama
-                builder.Services.AddIdentity<AppUser,AppRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
-            #endregion
-
-            #region Servisler tanýmý
-
-            builder.Services.AddScoped<ICompanyServices,CompanyServices>();
-            builder.Services.AddScoped<IUnitOfWork,UnitOfWorks>();
-            builder.Services.AddScoped<IUCAFCommandRepo,UCAFCommandRepository>();
-            builder.Services.AddScoped<IUCAFQueryRepo,UCAFQueryRepository>();
-            builder.Services.AddScoped<IContextService,ContextService>();
-            builder.Services.AddScoped<IUCAFServis,UCAFService>();
-            #endregion
-
-            #region mediatR services added
-
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OMPS.ApplicationKatmaný.AssemblyReferance).Assembly));
-            // builder.Services.AddMediatR(typeof(OMPS.ApplicationKatmaný.AssemblyReferance).Assembly));
-            #endregion
-
-            #region AutoMapper services added
-            // builder.Services.AddAutoMapper(typeof(OMPS.PresentationKatmani.AssemblyReferance).Assembly);
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            #endregion
-
-            #region Swager added
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(setup =>
-            {
-                var jwtSecurityScheme = new OpenApiSecurityScheme
-                {
-                    BearerFormat = "JWT",
-                    Name = "JWT Authentication",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = JwtBearerDefaults.AuthenticationScheme,
-                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
-
-                    Reference = new OpenApiReference
-                    {
-                        Id = JwtBearerDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
-                    }
-                };
-                setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
-                setup.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    { jwtSecurityScheme, Array.Empty<string>() }
-                });
-            });
+            #region Add services to the container.
+            builder.Services
+                .InstallService(builder.Configuration, typeof(IServisInstaller).Assembly);
             #endregion
 
             var app = builder.Build();
@@ -98,7 +22,10 @@ namespace OMPS.WebApi
                 app.UseSwaggerUI();
 
             }
+
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
