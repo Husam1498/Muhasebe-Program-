@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineMuhasebeProgramıServer.ApplicationKatmanı\OMPS.ApplicationKatmanı.csproj" />
+  </ItemGroup>
+
 </Project>

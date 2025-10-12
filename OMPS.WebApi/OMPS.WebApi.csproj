@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OMPS.PersistanceKatmani\OMPS.PersistanceKatmani.csproj" />
     <ProjectReference Include="..\OMPS.PresentationKatmani\OMPS.PresentationKatmani.csproj" />
+    <ProjectReference Include="..\OnlineMuhasebeProgramıServer.InfrastructureKatmani\OMPS.InfrastructureKatmani.csproj" />
   </ItemGroup>
 
 </Project>
