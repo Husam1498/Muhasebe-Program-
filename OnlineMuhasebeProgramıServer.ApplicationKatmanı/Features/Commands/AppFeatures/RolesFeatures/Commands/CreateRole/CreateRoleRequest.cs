@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.CreateRole
+namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.CreateRole
 {
     public sealed class CreateRoleRequest: IRequest<CreateRoleResponse>
     {

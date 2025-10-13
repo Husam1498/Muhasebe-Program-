@@ -24,6 +24,7 @@ namespace OMPS.WebApi.Configuration
                 #region Service Layer Services
                      services.AddScoped<IUCAFServis, UCAFService>();
                      services.AddScoped<ICompanyServices, CompanyServices>();
+                     services.AddScoped<IRolesService, RoleService>();
             #endregion
 
                  #region Repositories
