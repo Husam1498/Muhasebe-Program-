@@ -22,6 +22,7 @@ namespace OMPS.PersistanceKatmani.Context
             builder.Ignore<IdentityUserRole<string>>();
             builder.Ignore<IdentityUserClaim<string>>();
             builder.Ignore<IdentityUserToken<string>>();
+            builder.Ignore<IdentityRoleClaim<string>>();
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
