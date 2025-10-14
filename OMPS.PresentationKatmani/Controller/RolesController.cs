@@ -42,8 +42,8 @@ namespace OMPS.PresentationKatmani.Controller
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> DeleteRole(string id)
         {
-            DeleteroleCommands request = new() { Id = id };
-            DeleteRoleResponse response = await _mediator.Send(request);
+            DeleteroleCommands request = new(id);
+            DeleteRoleCommandResponse response = await _mediator.Send(request);
 
             return Ok(response);
 
