@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using OMPS.ApplicationKatmanı.Messaging;
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Queries
 {
-    public sealed class GetAllRolesRequest:IRequest<GetAllRoleResponse>
+    public sealed record GetAllRolesQueryt:IQuery<GetAllRoleQueryResponse>
     {
     }
 }

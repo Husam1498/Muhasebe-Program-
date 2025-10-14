@@ -1,36 +1,26 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.DeleteRole
 {
-    public sealed class DeleteroleCommands:IRequest<DeleteRoleResponse>
-    {
-        public string Id { get; set; }
-    }
+    public sealed record DeleteroleCommands(string Id):ICommand<DeleteRoleCommandResponse>;
+  
+    public sealed record DeleteRoleCommandResponse(string Message = "Role başarıyla silindi.");
 
-
-    public sealed class DeleteRoleResponse
-    {
-        public string Message { get; set; } = "Role başarıyla silindi.";
-    }
-
-    public sealed class DeleteRoleHandler : IRequestHandler<DeleteroleCommands, DeleteRoleResponse>
+    public sealed class DeleteRoleCommandHandler : ICommandHandler<DeleteroleCommands, DeleteRoleCommandResponse>
     {
         private readonly IRolesService _rolesService;
 
-        public DeleteRoleHandler(IRolesService rolesService)
+        public DeleteRoleCommandHandler(IRolesService rolesService)
         {
             _rolesService = rolesService;
         }
 
-        public async Task<DeleteRoleResponse> Handle(DeleteroleCommands request, CancellationToken cancellationToken)
+        public async Task<DeleteRoleCommandResponse> Handle(DeleteroleCommands request, CancellationToken cancellationToken)
         {
             AppRole role = await _rolesService.GetById(request.Id);
             if (role == null) throw new Exception("Role Bulunamdı");

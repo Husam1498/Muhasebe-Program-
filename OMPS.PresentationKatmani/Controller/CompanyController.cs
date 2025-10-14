@@ -13,17 +13,17 @@ namespace OMPS.PresentationKatmani.Controller
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateCompany(CreateCompayRequest request)
+        public async Task<IActionResult> CreateCompany(CreateCompayCommand request)
         { 
-            CreateCompanyResponse response = await _mediator.Send(request);
+            CreateCompanyCommandResponse response = await _mediator.Send(request);
             return Ok(response);
         }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> MigrateCompanyDatabases()
         {
-            MCDRequest requst = new();
-            MCDResponse response = await _mediator.Send(requst);
+            MCDCommand requst = new();
+            MCDCommandResponse response = await _mediator.Send(requst);
             return Ok(response);
         }
 

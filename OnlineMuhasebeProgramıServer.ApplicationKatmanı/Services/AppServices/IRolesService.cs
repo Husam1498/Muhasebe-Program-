@@ -9,7 +9,7 @@ namespace OMPS.ApplicationKatmanı.Services.AppServices
     public  interface IRolesService
     {
 
-        Task AddAsync(CreateRoleRequest request);
+        Task AddAsync(CreateRoleCommand request);
         Task UpdateAsync(AppRole appRole);
         Task DeleteAsync(AppRole appRole);
         Task<IList<AppRole>> GetAllRolesAsync();

@@ -25,7 +25,7 @@ namespace OMPS.PersistanceKatmani.Services.CompanyServices
             _unitOfWork = unitOfWork;
         }
 
-        public async Task CreateUCAFAsync(CreateUCAFRequest request)
+        public async Task CreateUCAFAsync(CreateUCAFCommand request)
         {
             _companyDbContext=(CompanyDbContext) _contextService.CreateDbContextInstance(request.CompanyId) as CompanyDbContext;
             _repository.CreateDbContextInstance(_companyDbContext);

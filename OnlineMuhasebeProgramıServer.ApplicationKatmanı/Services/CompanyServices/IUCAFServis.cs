@@ -9,6 +9,6 @@ namespace OMPS.ApplicationKatmanı.Services.CompanyServices
 {
     public interface IUCAFServis
     {
-        Task CreateUCAFAsync(CreateUCAFRequest request);
+        Task CreateUCAFAsync(CreateUCAFCommand request);
     }
 }

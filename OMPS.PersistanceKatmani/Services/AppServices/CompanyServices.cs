@@ -25,7 +25,7 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
             _ımapper = ımapper;
         }
         //Create COmpany
-        public async Task CreateCompanyAsync(CreateCompayRequest request)
+        public async Task CreateCompanyAsync(CreateCompayCommand request)
         {
             Company company = _ımapper.Map<Company>(request);
             await _context.Set<Company>().AddAsync(company);

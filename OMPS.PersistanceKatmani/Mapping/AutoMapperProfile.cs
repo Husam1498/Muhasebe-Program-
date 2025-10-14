@@ -13,9 +13,9 @@ namespace OMPS.PersistanceKatmani.Mapping
     {
         public AutoMapperProfile()
         {
-            CreateMap<CreateCompayRequest, Company>().ReverseMap();
-            CreateMap<CreateUCAFRequest, UCAF>().ReverseMap();
-            CreateMap<CreateRoleRequest, AppRole>().ReverseMap();
+            CreateMap<CreateCompayCommand, Company>().ReverseMap();
+            CreateMap<CreateUCAFCommand, UCAF>().ReverseMap();
+            CreateMap<CreateRoleCommand, AppRole>().ReverseMap();
         }
 
     }

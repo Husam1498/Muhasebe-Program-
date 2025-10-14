@@ -1,22 +1,23 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities.Identity;
 using System.Reflection.Metadata.Ecma335;
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.CreateRole
 {
-    public sealed class CreateRoleHandler : IRequestHandler<CreateRoleRequest, CreateRoleResponse>
+    public sealed class CreateRoleCommandHandler : ICommandHandler<CreateRoleCommand, CreateRoleCommandResponse>
     {
         private IRolesService _rolesService;
 
-        public CreateRoleHandler(IRolesService rolesService)
+        public CreateRoleCommandHandler(IRolesService rolesService)
         {
             _rolesService = rolesService;
         }
 
-        public async Task<CreateRoleResponse> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
+        public async Task<CreateRoleCommandResponse> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
            AppRole role= await _rolesService.GetByCode(request.Code);
 

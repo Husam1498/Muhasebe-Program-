@@ -1,18 +1,18 @@
-﻿using MediatR;
+﻿using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities;
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.CreateCompany
 {
-    public sealed class CreateCompanyHandler : 
-        IRequestHandler<CreateCompayRequest, CreateCompanyResponse>
+    public sealed class CreateCompanyCommandHandler : 
+        ICommandHandler<CreateCompayCommand, CreateCompanyCommandResponse>
     {
         private readonly ICompanyServices _companyServices;
-        public CreateCompanyHandler(ICompanyServices companyServices)
+        public CreateCompanyCommandHandler(ICompanyServices companyServices)
         {
             _companyServices = companyServices;
         }
-        public async Task<CreateCompanyResponse> Handle(CreateCompayRequest request, 
+        public async Task<CreateCompanyCommandResponse> Handle(CreateCompayCommand request, 
             CancellationToken cancellationToken)
         {
             Company company= await _companyServices.GetCompanyByName(request.Name);

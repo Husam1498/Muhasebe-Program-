@@ -2,20 +2,21 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OMPS.ApplicationKatmanı.Abstract;
+using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.DomainKatmani.AppEntities.Identity;
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Login
 {
-    public sealed class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
+    public sealed class LoginCommandHandler :ICommandHandler<LoginCommand, LoginCommandResponse>
     {
         private readonly IJwtProvider _jwtProvider;
         private readonly UserManager<AppUser> _userManager;
-        public LoginHandler(IJwtProvider jwtProvider, UserManager<AppUser> userManager)
+        public LoginCommandHandler(IJwtProvider jwtProvider, UserManager<AppUser> userManager)
         {
             _jwtProvider = jwtProvider;
             _userManager = userManager;
         }
-        public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
+        public async Task<LoginCommandResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
            AppUser user= await _userManager.Users.Where(u => 
            u.Email== request.EmailOrUsername ||
@@ -26,15 +27,13 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures
             var checkUser= await _userManager.CheckPasswordAsync(user, request.Password);
             if (!checkUser) throw new Exception("Şifreniz hatalı");
 
-            LoginResponse response = new()
-            {
-                Email = user.Email,
-                UserId = user.Id,
-                NameLastName = user.NameSurname,
-
-                Token= await _jwtProvider.CreateTokenAsync(user, null)
-
-            };
+            LoginCommandResponse response = new(
+                user.Email,
+                user.NameSurname,
+                user.Id,
+               await _jwtProvider.CreateTokenAsync(user, null));
+            
+           
 
             return response; 
 

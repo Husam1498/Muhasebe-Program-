@@ -15,9 +15,9 @@ namespace OMPS.PresentationKatmani.Controller
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateRole( CreateRoleRequest request)
+        public async Task<IActionResult> CreateRole( CreateRoleCommand request)
         {
-            CreateRoleResponse response = await _mediator.Send(request);
+            CreateRoleCommandResponse response = await _mediator.Send(request);
             return Ok(response);
 
         }
@@ -25,16 +25,16 @@ namespace OMPS.PresentationKatmani.Controller
         [HttpGet("[action]")]
         public async Task<IActionResult> GettAllRole()
         {
-            GetAllRolesRequest request = new();
-            GetAllRoleResponse response = await _mediator.Send(request);
+            GetAllRolesQueryt request = new();
+            GetAllRoleQueryResponse response = await _mediator.Send(request);
             return Ok(response);
 
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> UpdateRole(UpdateRoleRequest request)
+        public async Task<IActionResult> UpdateRole(UpdateRoleCommand request)
         {
-            UpdateRoleResponse response = await _mediator.Send(request);
+            UpdateRoleCommandResponse response = await _mediator.Send(request);
 
             return Ok(response);
 
