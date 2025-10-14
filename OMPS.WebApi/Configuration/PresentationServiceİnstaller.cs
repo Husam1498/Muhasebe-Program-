@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using OMPS.WebApi.Midleware;
 
 namespace OMPS.WebApi.Configuration
 {
@@ -8,6 +9,7 @@ namespace OMPS.WebApi.Configuration
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<ExceptionMidleware>();// midleware ı service olarak ekledik
 
             #region COntrollers added
             services.AddControllers()

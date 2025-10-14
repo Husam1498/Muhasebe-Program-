@@ -1,4 +1,5 @@
 using OMPS.WebApi.Configuration;
+using OMPS.WebApi.Midleware;
 
 namespace OMPS.WebApi
 {
@@ -22,6 +23,8 @@ namespace OMPS.WebApi
                 app.UseSwaggerUI();
 
             }
+
+            app.UseExceptionMidleware();
 
             app.UseHttpsRedirection();
 
