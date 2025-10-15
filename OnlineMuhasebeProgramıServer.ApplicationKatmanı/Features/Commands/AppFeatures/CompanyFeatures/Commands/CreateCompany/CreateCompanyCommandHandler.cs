@@ -18,7 +18,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures
             Company company= await _companyServices.GetCompanyByName(request.Name);
             if (company!= null)
                 throw new Exception("Aynı isimde şirket zaten mevcut");
-            await _companyServices.CreateCompanyAsync(request);
+            await _companyServices.CreateCompanyAsync(request,cancellationToken);
             return new();
         }
     }

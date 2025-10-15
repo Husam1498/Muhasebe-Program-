@@ -1,5 +1,4 @@
-﻿using MediatR;
-using OMPS.ApplicationKatmanı.Messaging;
+﻿using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.ApplicationKatmanı.Services.CompanyServices;
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.CompanyFeatures.UCAFFeatures.Commands.CreateUCAF
@@ -15,7 +14,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.CompanyFeatures.UCAFFeature
 
         public async Task<CreateUCAFCommandResponse> Handle(CreateUCAFCommand request, CancellationToken cancellationToken)
         {
-            await _ucafService.CreateUCAFAsync(request);
+            await _ucafService.CreateUCAFAsync(request, cancellationToken);
 
             return new();
         }

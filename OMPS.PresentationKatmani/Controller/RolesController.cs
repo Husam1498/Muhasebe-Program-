@@ -15,7 +15,7 @@ namespace OMPS.PresentationKatmani.Controller
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateRole( CreateRoleCommand request)
+        public async Task<IActionResult> CreateRole( CreateRoleCommand request)// canceletion tokeni kullanmamızın sebebi role tablosunu Identity clasıından alıyor olması
         {
             CreateRoleCommandResponse response = await _mediator.Send(request);
             return Ok(response);

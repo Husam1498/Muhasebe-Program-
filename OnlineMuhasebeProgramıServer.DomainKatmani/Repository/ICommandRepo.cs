@@ -7,9 +7,9 @@ namespace OMPS.DomainKatmani.Repository
     {
 
        
-        Task AddAsync(T entity);
+        Task AddAsync(T entity,CancellationToken cancellationToken);
 
-        Task AddRangeAsync(IEnumerable<T> entities);
+        Task AddRangeAsync(IEnumerable<T> entities,CancellationToken cancellationToken);
 
         void Update(T entity);
 

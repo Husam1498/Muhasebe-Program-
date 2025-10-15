@@ -25,14 +25,14 @@ namespace OMPS.PersistanceKatmani.Services.CompanyServices
             _unitOfWork = unitOfWork;
         }
 
-        public async Task CreateUCAFAsync(CreateUCAFCommand request)
+        public async Task CreateUCAFAsync(CreateUCAFCommand request, CancellationToken cancellationToken)
         {
             _companyDbContext=(CompanyDbContext) _contextService.CreateDbContextInstance(request.CompanyId) as CompanyDbContext;
             _repository.CreateDbContextInstance(_companyDbContext);
             _unitOfWork.CreateDbContextInstance(_companyDbContext);
             UCAF reques=_mapper.Map<UCAF>(request);
-            await _repository.AddAsync(reques);
-           await _unitOfWork.SaveChangesAsync();
+            await _repository.AddAsync(reques, cancellationToken);
+           await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

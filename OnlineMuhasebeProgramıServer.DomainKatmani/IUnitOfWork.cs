@@ -5,6 +5,6 @@ namespace OMPS.DomainKatmani
     public interface IUnitOfWork
     {
         void CreateDbContextInstance(DbContext context);
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

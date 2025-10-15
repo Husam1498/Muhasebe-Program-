@@ -19,14 +19,14 @@ namespace OMPS.PersistanceKatmani.Repositories
            _context = (CompanyDbContext)context;
         }
 
-        public async Task AddAsync(T entity)
+        public async Task AddAsync(T entity, CancellationToken cancellationToken)
         {
-            await _context.Set<T>().AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity,cancellationToken);
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public async Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken)
         {
-            await _context.Set<T>().AddRangeAsync(entities);
+            await _context.Set<T>().AddRangeAsync(entities,cancellationToken);
         }
 
         public void Remove(T entity)

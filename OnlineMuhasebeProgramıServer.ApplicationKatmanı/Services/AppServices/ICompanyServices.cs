@@ -5,7 +5,7 @@ namespace OMPS.ApplicationKatmanı.Services.AppServices
 {
     public  interface ICompanyServices
     {
-        Task CreateCompanyAsync(CreateCompayCommand request);
+        Task CreateCompanyAsync(CreateCompayCommand request,CancellationToken cancellationToken);
         Task MigrateCompanyDatabases();
         Task<Company?> GetCompanyByName(string name);
     }

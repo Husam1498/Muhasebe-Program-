@@ -13,9 +13,9 @@ namespace OMPS.PresentationKatmani.Controller
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateCompany(CreateCompayCommand request)
+        public async Task<IActionResult> CreateCompany(CreateCompayCommand request,CancellationToken cancellationToken)
         { 
-            CreateCompanyCommandResponse response = await _mediator.Send(request);
+            CreateCompanyCommandResponse response = await _mediator.Send(request, cancellationToken);
             return Ok(response);
         }
 
@@ -26,6 +26,7 @@ namespace OMPS.PresentationKatmani.Controller
             MCDCommandResponse response = await _mediator.Send(requst);
             return Ok(response);
         }
+        
 
     }
 }
