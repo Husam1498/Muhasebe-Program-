@@ -21,7 +21,7 @@ namespace OMPS.PersistanceKatmani.Context
         {
             if (company != null)
             {
-                if (company.UserId == "")
+                if (company.ServerUserId == "")
                 {
                     ConnectionString = $"Data Source={company.ServerName};" +
                             $" Initial Catalog=  {company.DatabaseName};" +
@@ -35,8 +35,8 @@ namespace OMPS.PersistanceKatmani.Context
                 {
                     ConnectionString = $"Data Source={company.ServerName};" +
                         $" Initial Catalog=  {company.DatabaseName}; " +
-                        $"UserId={company.UserId}; " +
-                        $"Password={company.Password} " +
+                        $"UserId={company.ServerUserId}; " +
+                        $"Password={company.ServerPassword} " +
                         $"Integrated Security=True;" +
                         $"Connect Timeout=30;Encrypt=True;" +
                         $"Trust Server Certificate=True;" +
