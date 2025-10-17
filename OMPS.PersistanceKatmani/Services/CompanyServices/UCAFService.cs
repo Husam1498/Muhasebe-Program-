@@ -12,17 +12,19 @@ namespace OMPS.PersistanceKatmani.Services.CompanyServices
     public sealed class UCAFService : IUCAFServis
     {
         private readonly IUCAFCommandRepo _repository;
+        private readonly IUCAFQueryRepo _queryRepository;
         private readonly IContextService _contextService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private CompanyDbContext _companyDbContext;
 
-        public UCAFService(IUCAFCommandRepo ucafCommandRepository, IContextService contextService, IMapper mapper, IUnitOfWork unitOfWork)
+        public UCAFService(IUCAFCommandRepo ucafCommandRepository, IContextService contextService, IMapper mapper, IUnitOfWork unitOfWork, IUCAFQueryRepo query)
         {
             _repository = ucafCommandRepository;
             _contextService = contextService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _queryRepository = query;
         }
 
         public async Task CreateUCAFAsync(CreateUCAFCommand request, CancellationToken cancellationToken)
@@ -33,6 +35,12 @@ namespace OMPS.PersistanceKatmani.Services.CompanyServices
             UCAF reques=_mapper.Map<UCAF>(request);
             await _repository.AddAsync(reques, cancellationToken);
            await _unitOfWork.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<UCAF> GetByCode( string code)
+        {
+            
+            return await _queryRepository.GetFirstByExpression(u=> u.Code == code);
         }
     }
 }

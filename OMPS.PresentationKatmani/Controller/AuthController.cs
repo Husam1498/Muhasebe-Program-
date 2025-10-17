@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Login;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Commands.Login;
 using OMPS.PresentationKatmani.Abstraction;
 
 namespace OMPS.PresentationKatmani.Controller

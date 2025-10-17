@@ -1,5 +1,4 @@
-﻿using MediatR;
-using OMPS.ApplicationKatmanı.Messaging;
+﻿using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities.Identity;
 

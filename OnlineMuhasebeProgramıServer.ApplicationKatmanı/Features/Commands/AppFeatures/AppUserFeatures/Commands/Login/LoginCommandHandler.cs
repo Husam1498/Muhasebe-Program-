@@ -5,7 +5,7 @@ using OMPS.ApplicationKatmanı.Abstract;
 using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.DomainKatmani.AppEntities.Identity;
 
-namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Login
+namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Commands.Login
 {
     public sealed class LoginCommandHandler :ICommandHandler<LoginCommand, LoginCommandResponse>
     {

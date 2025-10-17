@@ -1,5 +1,6 @@
 ﻿using OMPS.ApplicationKatmanı.Messaging;
 using OMPS.ApplicationKatmanı.Services.CompanyServices;
+using OMPS.DomainKatmani.CompanyEnties;
 
 namespace OMPS.ApplicationKatmanı.Features.Commands.CompanyFeatures.UCAFFeatures.Commands.CreateUCAF
 {
@@ -14,6 +15,9 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.CompanyFeatures.UCAFFeature
 
         public async Task<CreateUCAFCommandResponse> Handle(CreateUCAFCommand request, CancellationToken cancellationToken)
         {
+            UCAF ucaf= await _ucafService.GetByCode(request.Code);
+            if (ucaf != null) throw new Exception("Bu hesap planı Kodu daha önce açılmış");
+
             await _ucafService.CreateUCAFAsync(request, cancellationToken);
 
             return new();

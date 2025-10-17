@@ -1,4 +1,4 @@
-﻿namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Login
+﻿namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.AppUserFeatures.Commands.Login
 {
     public sealed record LoginCommandResponse(
         string Token,
