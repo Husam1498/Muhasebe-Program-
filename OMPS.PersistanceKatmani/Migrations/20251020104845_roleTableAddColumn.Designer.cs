@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OMPS.PersistanceKatmani.Context;
 
@@ -11,9 +12,11 @@ using OMPS.PersistanceKatmani.Context;
 namespace OMPS.PersistanceKatmani.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251020104845_roleTableAddColumn")]
+    partial class roleTableAddColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,63 +190,6 @@ namespace OMPS.PersistanceKatmani.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("OMPS.DomainKatmani.AppEntities.MainRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CompanyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRoleCreatedByAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("MainRoles");
-                });
-
-            modelBuilder.Entity("OMPS.DomainKatmani.AppEntities.MainRoleAndRoleRelationship", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MainRoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MainRoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("MainRoleAndRoleRelationships");
-                });
-
             modelBuilder.Entity("OMPS.DomainKatmani.AppEntities.AppUserAndCompany", b =>
                 {
                     b.HasOne("OMPS.DomainKatmani.AppEntities.Company", "Company")
@@ -261,36 +207,6 @@ namespace OMPS.PersistanceKatmani.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("OMPS.DomainKatmani.AppEntities.MainRole", b =>
-                {
-                    b.HasOne("OMPS.DomainKatmani.AppEntities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("OMPS.DomainKatmani.AppEntities.MainRoleAndRoleRelationship", b =>
-                {
-                    b.HasOne("OMPS.DomainKatmani.AppEntities.MainRole", "MainRole")
-                        .WithMany()
-                        .HasForeignKey("MainRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OMPS.DomainKatmani.AppEntities.Identity.AppRole", "AppRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppRole");
-
-                    b.Navigation("MainRole");
                 });
 #pragma warning restore 612, 618
         }

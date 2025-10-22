@@ -10,6 +10,7 @@ namespace OMPS.ApplicationKatmanı.Services.AppServices
     {
 
         Task AddAsync(CreateRoleCommand request);
+        Task AddRange(IEnumerable<AppRole> Roles);
         Task UpdateAsync(AppRole appRole);
         Task DeleteAsync(AppRole appRole);
         Task<IList<AppRole>> GetAllRolesAsync();

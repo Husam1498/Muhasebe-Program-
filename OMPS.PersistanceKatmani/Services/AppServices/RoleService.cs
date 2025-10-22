@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.CreateRole;
-using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.UpdateRole;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities.Identity;
-using System.Runtime.InteropServices;
 
 namespace OMPS.PersistanceKatmani.Services.AppServices
 {
@@ -25,6 +23,14 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
             AppRole role = _mapper.Map<AppRole>(request);
             role.Id = Guid.NewGuid().ToString();
             await _roleManager.CreateAsync(role);
+        }
+
+        public async Task AddRange(IEnumerable<AppRole> Roles)
+        {
+          foreach(var role in Roles)
+            {
+               await _roleManager.CreateAsync(role);
+            }
         }
 
         public async Task DeleteAsync(AppRole appRole)
@@ -54,5 +60,6 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
         {
            await _roleManager.UpdateAsync(appRole);
         }
+
     }
 }

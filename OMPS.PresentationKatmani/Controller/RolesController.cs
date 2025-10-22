@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.CreateAllRoles;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.CreateRole;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.DeleteRole;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.RolesFeatures.Commands.UpdateRole;
@@ -45,6 +46,16 @@ namespace OMPS.PresentationKatmani.Controller
             DeleteroleCommands request = new(id);
             DeleteRoleCommandResponse response = await _mediator.Send(request);
 
+            return Ok(response);
+
+        }
+
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CreateAddRangeRoles()
+        {
+            CreateAllRolesCommand request = new();
+            CreateAllRolesResponse response = await _mediator.Send(request);
             return Ok(response);
 
         }

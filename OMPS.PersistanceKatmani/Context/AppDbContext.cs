@@ -14,10 +14,18 @@ namespace OMPS.PersistanceKatmani.Context
         {
 
         }
+        #region DbSet Add
         public DbSet<Company> Companies { get; set; }
         public DbSet<AppUserAndCompany> AppUserAndCompanies { get; set; }
+        public DbSet<MainRole> MainRoles { get; set; }
+        public DbSet<MainRoleAndRoleRelationship> MainRoleAndRoleRelationships { get; set; }
+        #endregion
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // identiy classlarında olmayak sınıflar
             builder.Ignore<IdentityUserLogin<string>>();
             builder.Ignore<IdentityUserRole<string>>();
             builder.Ignore<IdentityUserClaim<string>>();
