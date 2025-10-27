@@ -21,7 +21,7 @@ namespace OMPS.PersistanceKatmani.Context
         {
             if (company != null)
             {
-                if (company.ServerUserId == "")
+                if (company.ServerUserId == "" || company.ServerUserId==null)
                 {
                     ConnectionString = $"Data Source={company.ServerName};" +
                             $" Initial Catalog=  {company.DatabaseName};" +

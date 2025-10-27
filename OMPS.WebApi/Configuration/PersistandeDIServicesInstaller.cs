@@ -1,12 +1,15 @@
-﻿
-using OMPS.ApplicationKatmanı.Services.AppServices;
+﻿using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.ApplicationKatmanı.Services.CompanyServices;
 using OMPS.DomainKatmani;
+using OMPS.DomainKatmani.Repository.GenericRepository.AppDbContext.CompanyRepositories;
 using OMPS.DomainKatmani.Repository.UCAFRepos;
+using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani;
-using OMPS.PersistanceKatmani.Repositories.UCAFRepository;
+using OMPS.PersistanceKatmani.Repositories.AppDbContext.CompanyRepositories;
+using OMPS.PersistanceKatmani.Repositories.CompanyDbContext.UCAFRepository;
 using OMPS.PersistanceKatmani.Services.AppServices;
 using OMPS.PersistanceKatmani.Services.CompanyServices;
+using OMPS.PersistanceKatmani.UnitOfWOrks;
 
 namespace OMPS.WebApi.Configuration
 {
@@ -17,8 +20,10 @@ namespace OMPS.WebApi.Configuration
             #region Servisler tanımı
 
                 #region UnıtOfWork and ContextService
-                    services.AddScoped<IUnitOfWork, UnitOfWorks>();
+                    services.AddScoped<ICompanyDbUnitOfWork, CompanyDbUnitOfWorks>();
                     services.AddScoped<IContextService, ContextService>();
+                    services.AddScoped<IAppUnitOfWorks, AppUnitOfWorks>();
+                    
             #endregion
 
                 #region Service Layer Services
@@ -27,9 +32,12 @@ namespace OMPS.WebApi.Configuration
                      services.AddScoped<IRolesService, RoleService>();
             #endregion
 
-                 #region Repositories
+                #region Repositories
                     services.AddScoped<IUCAFCommandRepo, UCAFCommandRepository>();
                     services.AddScoped<IUCAFQueryRepo, UCAFQueryRepository>();
+
+                    services.AddScoped<ICompanyCommandRepository,CompanyCommandRepository>();
+                    services.AddScoped<ICompanyQueryRepository,CompanyQueryRepository>();
                 #endregion
 
             #endregion

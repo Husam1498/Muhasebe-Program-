@@ -1,22 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OMPS.DomainKatmani.Abstractions;
-using OMPS.DomainKatmani.Repository;
-using OMPS.PersistanceKatmani.Context;
+using OMPS.DomainKatmani.Repository.GenericRepository.CompanyDbContext;
 
-namespace OMPS.PersistanceKatmani.Repositories
+namespace OMPS.PersistanceKatmani.Repositories.GenericRepository.CompanyDbContext
 {
-    public class CommandRepository<T> : ICommandRepo<T> where T : Entity
+    public class CompanyDbCommandRepository<T> : ICompanyDbCommandRepo<T> where T : Entity
     {
-        private static readonly Func<CompanyDbContext, string, Task<T>>
-            GetbyIdCompiled = EF.CompileAsyncQuery((CompanyDbContext context, string id) =>
+        private static readonly Func<Context.CompanyDbContext, string, Task<T>>
+            GetbyIdCompiled = EF.CompileAsyncQuery((Context.CompanyDbContext context, string id) =>
                 context.Set<T>()
                 .FirstOrDefault(p => p.Id == id));
 
-        private  CompanyDbContext _context;
+        private  Context.CompanyDbContext _context;
 
         public void CreateDbContextInstance(DbContext context)
         {
-           _context = (CompanyDbContext)context;
+           _context = (Context.CompanyDbContext)context;
         }
 
         public async Task AddAsync(T entity, CancellationToken cancellationToken)

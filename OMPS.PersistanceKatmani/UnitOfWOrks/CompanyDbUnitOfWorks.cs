@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OMPS.DomainKatmani;
+using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani.Context;
 
-namespace OMPS.PersistanceKatmani
+namespace OMPS.PersistanceKatmani.UnitOfWOrks
 {
-    public sealed class UnitOfWorks : IUnitOfWork
+    public sealed class CompanyDbUnitOfWorks : ICompanyDbUnitOfWork
     {
         private CompanyDbContext _context;
         public void CreateDbContextInstance(DbContext context)

@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OMPS.DomainKatmani.Repository
+namespace OMPS.DomainKatmani.Repository.GenericRepository.CompanyDbContext
 {
-    public interface  IRepository
+    public interface  ICompanyDbRepository
     {
         void CreateDbContextInstance(DbContext context);// iki tane context olduğu için crud işlemlerinde hangi veirtabanına göndereceğini belirlemek içn
     }

@@ -4,6 +4,7 @@ using OMPS.ApplicationKatmanı.Services.CompanyServices;
 using OMPS.DomainKatmani;
 using OMPS.DomainKatmani.CompanyEnties;
 using OMPS.DomainKatmani.Repository.UCAFRepos;
+using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani.Context;
 
 
@@ -14,11 +15,11 @@ namespace OMPS.PersistanceKatmani.Services.CompanyServices
         private readonly IUCAFCommandRepo _repository;
         private readonly IUCAFQueryRepo _queryRepository;
         private readonly IContextService _contextService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICompanyDbUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private CompanyDbContext _companyDbContext;
 
-        public UCAFService(IUCAFCommandRepo ucafCommandRepository, IContextService contextService, IMapper mapper, IUnitOfWork unitOfWork, IUCAFQueryRepo query)
+        public UCAFService(IUCAFCommandRepo ucafCommandRepository, IContextService contextService, IMapper mapper, ICompanyDbUnitOfWork unitOfWork, IUCAFQueryRepo query)
         {
             _repository = ucafCommandRepository;
             _contextService = contextService;
