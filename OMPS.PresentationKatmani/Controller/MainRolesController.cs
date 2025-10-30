@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeatures.Commands.CreateMainRole;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeatures.Commands.CreateStaticMainRole;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeatures.Commands.RemoveMainRole;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeatures.Commands.UpdateMainRole;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeatures.Queryies.GettAllMainRoleQuery;
 using OMPS.PresentationKatmani.Abstraction;
 
@@ -33,6 +35,21 @@ namespace OMPS.PresentationKatmani.Controller
         public async Task<IActionResult> GetAllMainRole(GetAllMainRoleQuery query)
         {
             GetAllMainRoleResponse response= await _mediator.Send( query);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> DeleteMainRole(RemoveMainRoleCommand command)
+        {
+            RemoveMainRoleResponse response= await _mediator.Send(command);
+
+            return Ok(response);
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> UpdateMainRole(UpdateMainRoleCommand command)
+        {
+            UpdateMainRoleResponse response= await _mediator.Send(command);
 
             return Ok(response);
         }

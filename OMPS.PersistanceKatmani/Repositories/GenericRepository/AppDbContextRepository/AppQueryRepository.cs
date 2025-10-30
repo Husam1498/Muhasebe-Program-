@@ -10,7 +10,7 @@ namespace OMPS.PersistanceKatmani.Repositories.GenericRepository.AppDbContextRep
       
             private static readonly Func<Context.AppDbContext, string, bool, Task<T>>
                 GetbyIdCompiled = EF.CompileAsyncQuery((Context.AppDbContext context, string id, bool isTracking) =>
-                   isTracking == true ? context.Set<T>().FirstOrDefault(p => p.Id == id) : context.Set<T>().AsNoTracking().FirstOrDefault(p => p.Id == id));
+                   context.Set<T>().FirstOrDefault(p => p.Id == id));
 
             private static readonly Func<Context.AppDbContext, bool, Task<T>>
               GetbyFirstCompiled = EF.CompileAsyncQuery((Context.AppDbContext context, bool isTracking) =>

@@ -23,7 +23,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeature
                 Guid.NewGuid().ToString(),
                 request.Title,
                 request.CompanyId,
-                request.IRoleCreatedByAdmin
+                request.CompanyId!= null ? false: true
                 );  
             await _mainRoleService.CreateAsync( mainRole, cancellationToken );
 

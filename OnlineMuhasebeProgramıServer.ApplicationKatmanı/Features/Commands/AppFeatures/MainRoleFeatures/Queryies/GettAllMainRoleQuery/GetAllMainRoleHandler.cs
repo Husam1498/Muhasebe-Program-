@@ -17,7 +17,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeature
         {
             var result = _mainRoleService.GetAll();
 
-            return new(await result.ToListAsync());
+            return new GetAllMainRoleResponse(await result.ToListAsync());
         }
     }
 }

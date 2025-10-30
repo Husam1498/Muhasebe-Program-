@@ -4,7 +4,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleFeature
 {
     public sealed record CreateMainRoleCommand(
         string Title,
-        bool IRoleCreatedByAdmin =false,
+      //  bool IRoleCreatedByAdmin =false,
         string CompanyId=null
     ): ICommand<CreatemainRoleCommandsResponse>;
 }

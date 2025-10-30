@@ -33,7 +33,7 @@ namespace OMP.UnitTest.Features.Commands.AppFeatures.MainRoleFeatures
         {
             var command = new CreateMainRoleCommand(
                 Title:"dsds",
-                IRoleCreatedByAdmin:false,
+              
                 CompanyId: "438cc12d-b618-440b-a493-0b2d2cee91ce"
                 );
 

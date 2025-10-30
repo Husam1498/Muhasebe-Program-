@@ -37,12 +37,29 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
             return _queryRepo.GetAll();
         }
 
+        public async Task<MainRole> GetById(string id)
+        {
+            return await _queryRepo.GetById(id);
+        }
+
         public async Task<MainRole> GetByTitleAndCompanyId(string Title, string CompanyId , CancellationToken cancellationToken)
         {
             //if(CompanyId == null) return await _queryRepo.GetFirstByExpression(p => p.Title == Title);
 
             return await _queryRepo.GetFirstByExpression(p => p.Title == Title && 
                 p.CompanyId == CompanyId, cancellationToken,false);
+        }
+
+        public async Task RemoveByIdAsync(string Id)
+        {
+            await _commandRepo.RemoveById(Id);
+            await _unitOfWorks.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(MainRole mainRole)
+        {
+             _commandRepo.Update(mainRole);
+            await _unitOfWorks.SaveChangesAsync();
         }
     }
 }
