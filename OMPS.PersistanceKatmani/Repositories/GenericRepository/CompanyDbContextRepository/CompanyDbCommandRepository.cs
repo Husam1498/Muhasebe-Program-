@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OMPS.DomainKatmani.Abstractions;
-using OMPS.DomainKatmani.Repository.GenericRepository.CompanyDbContext;
+using OMPS.DomainKatmani.Repository.CompanyDbContext;
 
 namespace OMPS.PersistanceKatmani.Repositories.GenericRepository.CompanyDbContext
 {

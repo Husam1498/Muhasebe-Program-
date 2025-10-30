@@ -21,9 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\AppFeatures\AppUserFeatures\Queries\" />
-    <Folder Include="Features\Commands\AppFeatures\CompanyFeatures\Commands\MigrateCompanyDatabase\" />
-    <Folder Include="Features\Commands\AppFeatures\CompanyFeatures\Queries\" />
     <Folder Include="Features\Commands\CompanyFeatrues\UCAFFeatures\Queries\" />
   </ItemGroup>
 

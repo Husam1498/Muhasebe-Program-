@@ -11,7 +11,7 @@ namespace OMPS.PersistanceKatmani.UnitOfWOrks
         {
             _context = (CompanyDbContext)context;
         }
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken=default)
         {
             int count= await _context.SaveChangesAsync(cancellationToken);
             return count;

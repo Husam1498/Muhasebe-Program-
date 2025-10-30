@@ -27,7 +27,7 @@ namespace OMP.UnitTest.Features.Commands.CompanyFeatrues.UCAFFeatures.Commands
             */
             #endregion
 
-            UCAF ucaf = await _ucafService.Object.GetByCode("100.01.001");
+            UCAF ucaf = await _ucafService.Object.GetByCode("100.01.001",default);
             ucaf.ShouldBeNull();
 
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.CreateCompany;
 using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities;
-using OMPS.DomainKatmani.Repository.GenericRepository.AppDbContext.CompanyRepositories;
+using OMPS.DomainKatmani.Repository.AppDbContext.CompanyRepositories;
 using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani.Context;
 
@@ -41,9 +41,9 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
         }
 
         //şiirket adı ile şirket getir
-        public async Task<Company?> GetCompanyByName(string name)
+        public async Task<Company?> GetCompanyByName(string name,CancellationToken cancellationToken)
         {
-            return await _companyQueryRepository.GetFirstByExpression(p => p.Name == name);
+            return await _companyQueryRepository.GetFirstByExpression(p => p.Name == name, cancellationToken);
         }
 
         public async Task MigrateCompanyDatabases()

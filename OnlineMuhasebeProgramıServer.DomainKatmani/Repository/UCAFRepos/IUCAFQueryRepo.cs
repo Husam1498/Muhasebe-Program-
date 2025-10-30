@@ -1,5 +1,5 @@
 ﻿using OMPS.DomainKatmani.CompanyEnties;
-using OMPS.DomainKatmani.Repository.GenericRepository.CompanyDbContext;
+using OMPS.DomainKatmani.Repository.CompanyDbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,7 @@
 ﻿using OMPS.DomainKatmani.AppEntities;
+using OMPS.DomainKatmani.Repository.AppDbContext;
 
-namespace OMPS.DomainKatmani.Repository.GenericRepository.AppDbContext.CompanyRepositories
+namespace OMPS.DomainKatmani.Repository.AppDbContext.CompanyRepositories
 {
     public interface ICompanyQueryRepository : IAppQueryRepository<Company>
     {

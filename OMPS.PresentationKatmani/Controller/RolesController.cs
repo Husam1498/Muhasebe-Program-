@@ -54,8 +54,8 @@ namespace OMPS.PresentationKatmani.Controller
         [HttpGet("[action]")]
         public async Task<IActionResult> CreateAddRangeRoles()
         {
-            CreateAllRolesCommand request = new();
-            CreateAllRolesResponse response = await _mediator.Send(request);
+            CreateStaticRolesCommand request = new();
+            CreateStaticRolesResponse response = await _mediator.Send(request);
             return Ok(response);
 
         }

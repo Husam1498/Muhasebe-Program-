@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OMPS.DomainKatmani.Abstractions;
-using OMPS.DomainKatmani.Repository.GenericRepository.CompanyDbContext;
-using OMPS.PersistanceKatmani.Context;
+using OMPS.DomainKatmani.Repository.CompanyDbContext;
 using System.Linq.Expressions;
 
 namespace OMPS.PersistanceKatmani.Repositories
@@ -45,7 +44,7 @@ namespace OMPS.PersistanceKatmani.Repositories
             return await GetbyFirstCompiled(_context, IsTracking);
         }
 
-        public async Task<T> GetFirstByExpression(Expression<Func<T, bool>> expression, bool IsTracking = true)
+        public async Task<T> GetFirstByExpression(Expression<Func<T, bool>> expression,CancellationToken cancellationToken, bool IsTracking = true)
         {
             T entity = null;
             if (!IsTracking)

@@ -15,7 +15,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.CompanyFeatures.UCAFFeature
 
         public async Task<CreateUCAFCommandResponse> Handle(CreateUCAFCommand request, CancellationToken cancellationToken)
         {
-            UCAF ucaf= await _ucafService.GetByCode(request.Code);
+            UCAF ucaf= await _ucafService.GetByCode(request.Code, cancellationToken);
             if (ucaf != null) throw new Exception("Bu hesap planı Kodu daha önce açılmış");
 
             await _ucafService.CreateUCAFAsync(request, cancellationToken);

@@ -1,4 +1,5 @@
-﻿using OMPS.DomainKatmani.AppEntities.Identity;
+﻿using OMPS.DomainKatmani.AppEntities;
+using OMPS.DomainKatmani.AppEntities.Identity;
 
 namespace OMPS.DomainKatmani.Roles
 {
@@ -38,6 +39,34 @@ namespace OMPS.DomainKatmani.Roles
             #endregion
 
             return appRoles;
+        }
+
+        public static List<MainRole> GetStaticMainRoles()
+        {
+            List<MainRole> mainRoles = new List<MainRole>()
+            {
+                new MainRole(
+                    Guid.NewGuid().ToString(), 
+                    "Admin",
+                    null,
+                    true
+                    ),
+
+                new MainRole(
+                    Guid.NewGuid().ToString(),
+                    "Yönetici",
+                    null,
+                    true
+                    ),
+                new MainRole(
+                    Guid.NewGuid().ToString(),
+                    "Kullanıcı",
+                    null,
+                    true
+                    )
+            };
+            return mainRoles;
+
         }
 
         #region UcafTitleNames

@@ -38,10 +38,10 @@ namespace OMPS.PersistanceKatmani.Services.CompanyServices
            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<UCAF> GetByCode( string code)
+        public async Task<UCAF> GetByCode( string code,CancellationToken cancellationToken)
         {
             
-            return await _queryRepository.GetFirstByExpression(u=> u.Code == code);
+            return await _queryRepository.GetFirstByExpression(u=> u.Code == code, cancellationToken);
         }
     }
 }

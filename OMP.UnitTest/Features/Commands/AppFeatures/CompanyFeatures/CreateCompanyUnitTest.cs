@@ -5,7 +5,7 @@ using OMPS.DomainKatmani.AppEntities;
 using Shouldly;
 using System.ComponentModel.DataAnnotations;
 
-namespace OMP.UnitTest.Features.Commands.AppFeatures.CompanyFeatures.Commands.CreateCompany
+namespace OMP.UnitTest.Features.Commands.AppFeatures.CompanyFeatures
 {
     public class CreateCompanyUnitTest
     {
@@ -19,7 +19,7 @@ namespace OMP.UnitTest.Features.Commands.AppFeatures.CompanyFeatures.Commands.Cr
         [Fact]
         public async Task CompanyShouldBeNull()
         {
-            Company company = (await _companyServices.Object.GetCompanyByName("Test String"))!;
+            Company company = (await _companyServices.Object.GetCompanyByName("Test String",default))!;
             company.ShouldBeNull();
             
             

@@ -15,7 +15,7 @@ namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures
         public async Task<CreateCompanyCommandResponse> Handle(CreateCompayCommand request, 
             CancellationToken cancellationToken)
         {
-            Company company= await _companyServices.GetCompanyByName(request.Name);
+            Company company= await _companyServices.GetCompanyByName(request.Name,cancellationToken);
             if (company!= null)
                 throw new Exception("Aynı isimde şirket zaten mevcut");
             await _companyServices.CreateCompanyAsync(request,cancellationToken);

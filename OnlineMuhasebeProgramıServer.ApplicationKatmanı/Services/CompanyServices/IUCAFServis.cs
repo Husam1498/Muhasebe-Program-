@@ -6,6 +6,6 @@ namespace OMPS.ApplicationKatmanı.Services.CompanyServices
     public interface IUCAFServis
     {
         Task CreateUCAFAsync(CreateUCAFCommand request, CancellationToken cancellationToken);
-        Task<UCAF> GetByCode( string code);
+        Task<UCAF> GetByCode( string code,CancellationToken cancellationToken);
     }
 }

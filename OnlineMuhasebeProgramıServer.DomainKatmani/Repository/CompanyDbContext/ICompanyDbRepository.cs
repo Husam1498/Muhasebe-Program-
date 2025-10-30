@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace OMPS.DomainKatmani.Repository.GenericRepository.CompanyDbContext
+namespace OMPS.DomainKatmani.Repository.CompanyDbContext
 {
     public interface  ICompanyDbRepository
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OMPS.DomainKatmani.Abstractions;
-using OMPS.DomainKatmani.Repository.GenericRepository.AppDbContext;
+using OMPS.DomainKatmani.Repository.AppDbContext;
 
 namespace OMPS.PersistanceKatmani.Repositories.GenericRepository.AppDbContextRepository
 {
