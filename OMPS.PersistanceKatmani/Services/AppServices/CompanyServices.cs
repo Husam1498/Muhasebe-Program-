@@ -6,6 +6,8 @@ using OMPS.DomainKatmani.AppEntities;
 using OMPS.DomainKatmani.Repository.AppDbContext.CompanyRepositories;
 using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani.Context;
+using OMPS.PersistanceKatmani.Repositories.AppDbContext.CompanyRepositories;
+using System.Threading.Tasks;
 
 namespace OMPS.PersistanceKatmani.Services.AppServices
 {
@@ -39,6 +41,13 @@ namespace OMPS.PersistanceKatmani.Services.AppServices
             await _appUnitOfWorks.SaveChangesAsync(cancellationToken);
 
         }
+
+        public IQueryable<Company> GetAllCompanies()
+        {          
+            return _companyQueryRepository.GetAll();
+        }
+
+
 
         //şiirket adı ile şirket getir
         public async Task<Company?> GetCompanyByName(string name,CancellationToken cancellationToken)

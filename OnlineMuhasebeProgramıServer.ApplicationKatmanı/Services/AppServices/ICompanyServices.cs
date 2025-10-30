@@ -8,5 +8,6 @@ namespace OMPS.ApplicationKatmanı.Services.AppServices
         Task CreateCompanyAsync(CreateCompayCommand request,CancellationToken cancellationToken);
         Task MigrateCompanyDatabases();
         Task<Company?> GetCompanyByName(string name,CancellationToken cancellationToken);
+        IQueryable<Company> GetAllCompanies();
     }
 }

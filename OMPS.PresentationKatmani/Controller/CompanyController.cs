@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.CreateCompany;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Commands.MigrateCompanyDatabase;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.CompanyFeatures.Queries.GettAlLCompany;
 using OMPS.PresentationKatmani.Abstraction;
 
 namespace OMPS.PresentationKatmani.Controller
@@ -26,7 +27,15 @@ namespace OMPS.PresentationKatmani.Controller
             MCDCommandResponse response = await _mediator.Send(requst);
             return Ok(response);
         }
-        
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetALlCompanies()
+        {
+            GetAllCompanyQuery requst = new();
+            GetAllCompanyResponse response = await _mediator.Send(requst);
+            return Ok(response);
+        }
+
 
     }
 }
