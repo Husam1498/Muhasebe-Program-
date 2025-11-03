@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleAndRoleFeatures.Commands
+namespace OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleAndRoleFeatures.Commands.Create
 {
     public sealed class CreateMRARFCommandValidator :
         AbstractValidator<CreateMRARFCommand>

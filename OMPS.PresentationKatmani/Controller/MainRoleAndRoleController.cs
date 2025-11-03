@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleAndRoleFeatures.Commands;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleAndRoleFeatures.Commands.Create;
+using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleAndRoleFeatures.Commands.RemoveById;
 using OMPS.ApplicationKatmanı.Features.Commands.AppFeatures.MainRoleAndRoleFeatures.Queries.GetAllMainRoleAndRole;
 using OMPS.PresentationKatmani.Abstraction;
 
@@ -24,6 +25,14 @@ namespace OMPS.PresentationKatmani.Controller
         {
             GetAllMainRoleAndRoleQuery query = new();
             GetAllMainRoleAndRoleResponse response = await _mediator.Send(query);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> RemoveById(RemoveByIdMRARFCommand command)
+        {         
+            RemoveByIdMRARFResponse response = await _mediator.Send(command);
 
             return Ok(response);
         }
