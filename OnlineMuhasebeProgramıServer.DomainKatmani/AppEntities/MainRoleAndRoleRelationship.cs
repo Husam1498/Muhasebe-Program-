@@ -6,6 +6,16 @@ namespace OMPS.DomainKatmani.AppEntities
 {
     public sealed class MainRoleAndRoleRelationship:Entity
     {
+        public MainRoleAndRoleRelationship()
+        {
+        }
+
+        public MainRoleAndRoleRelationship(string ıd,string roleId, string mainRoleId) : base(ıd)
+        {
+            RoleId = roleId;
+            MainRoleId = mainRoleId;
+        }
+
         [ForeignKey(nameof(AppRole))]
         public string RoleId { get; set; }
         public AppRole AppRole { get; set; }

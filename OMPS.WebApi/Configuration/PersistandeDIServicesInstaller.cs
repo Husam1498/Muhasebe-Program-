@@ -2,11 +2,13 @@
 using OMPS.ApplicationKatmanı.Services.CompanyServices;
 using OMPS.DomainKatmani;
 using OMPS.DomainKatmani.Repository.AppDbContext.CompanyRepositories;
+using OMPS.DomainKatmani.Repository.AppDbContext.MainRoleAndRoleRepositories;
 using OMPS.DomainKatmani.Repository.AppDbContext.MainRoleRepositories;
 using OMPS.DomainKatmani.Repository.UCAFRepos;
 using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani;
 using OMPS.PersistanceKatmani.Repositories.AppDbContext.CompanyRepositories;
+using OMPS.PersistanceKatmani.Repositories.AppDbContext.MainRoleAndRole;
 using OMPS.PersistanceKatmani.Repositories.AppDbContext.MainRoleRepositories;
 using OMPS.PersistanceKatmani.Repositories.CompanyDbContext.UCAFRepository;
 using OMPS.PersistanceKatmani.Services.AppServices;
@@ -34,6 +36,7 @@ namespace OMPS.WebApi.Configuration
                      services.AddScoped<ICompanyServices, CompanyServices>();
                      services.AddScoped<IRolesService, RoleService>();
                      services.AddScoped<IMainRoleService , MainRoleService>();
+                     services.AddScoped<IMainRoleAndRoleRelationshipServices , MainRoleAndRoleServices>();
                      
             #endregion
 
@@ -46,6 +49,9 @@ namespace OMPS.WebApi.Configuration
 
                     services.AddScoped<IMainRoleCommandRepo, MainRoleCommandRepository>();
                     services.AddScoped<IMainRoleQueryRepo, MainRoleQueryRepository>();
+
+                    services.AddScoped<IMainRoleAndRoleCommandRepo, MainRoleAndRoleCommandRepository>();
+                    services.AddScoped<IMainRoleAndRoleQueryRepo, MainRoleAndRoleQueryRepository>();
             #endregion
 
             #endregion
