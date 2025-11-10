@@ -6,6 +6,17 @@ namespace OMPS.DomainKatmani.AppEntities
 {
     public sealed class AppUserAndCompany:Entity
     {
+        public AppUserAndCompany()
+        {
+            
+        }
+
+        public AppUserAndCompany(string id,string userId, string companyId):base(id)
+        {
+            UserId = userId;
+            CompanyId = companyId;
+        }
+
         [ForeignKey(nameof(AppUser))]
         public string UserId { get; set; }
         public AppUser  AppUser { get; set; }

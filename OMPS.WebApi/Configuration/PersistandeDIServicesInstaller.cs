@@ -1,14 +1,18 @@
 ﻿using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.ApplicationKatmanı.Services.CompanyServices;
 using OMPS.DomainKatmani;
+using OMPS.DomainKatmani.Repository.AppDbContext.AppUserAndCompanyRepositories;
 using OMPS.DomainKatmani.Repository.AppDbContext.CompanyRepositories;
 using OMPS.DomainKatmani.Repository.AppDbContext.MainRoleAndRoleRepositories;
+using OMPS.DomainKatmani.Repository.AppDbContext.MainRoleAndUserRepositories;
 using OMPS.DomainKatmani.Repository.AppDbContext.MainRoleRepositories;
 using OMPS.DomainKatmani.Repository.UCAFRepos;
 using OMPS.DomainKatmani.UnitOfWorks;
 using OMPS.PersistanceKatmani;
+using OMPS.PersistanceKatmani.Repositories.AppDbContext.AppUserAndCompanyRepositories;
 using OMPS.PersistanceKatmani.Repositories.AppDbContext.CompanyRepositories;
 using OMPS.PersistanceKatmani.Repositories.AppDbContext.MainRoleAndRole;
+using OMPS.PersistanceKatmani.Repositories.AppDbContext.MainRoleAndUser;
 using OMPS.PersistanceKatmani.Repositories.AppDbContext.MainRoleRepositories;
 using OMPS.PersistanceKatmani.Repositories.CompanyDbContext.UCAFRepository;
 using OMPS.PersistanceKatmani.Services.AppServices;
@@ -37,8 +41,11 @@ namespace OMPS.WebApi.Configuration
                      services.AddScoped<IRolesService, RoleService>();
                      services.AddScoped<IMainRoleService , MainRoleService>();
                      services.AddScoped<IMainRoleAndRoleRelationshipServices , MainRoleAndRoleServices>();
+                     services.AddScoped<IAppUserAndCompanyServices , AppUserAndCompanyServices>();
+                     services.AddScoped<IMainRoleAndUserServices , MainRoleAndUserServices>();
+
                      
-            #endregion
+                #endregion
 
                 #region Repositories
                     services.AddScoped<IUCAFCommandRepo, UCAFCommandRepository>();
@@ -52,6 +59,13 @@ namespace OMPS.WebApi.Configuration
 
                     services.AddScoped<IMainRoleAndRoleCommandRepo, MainRoleAndRoleCommandRepository>();
                     services.AddScoped<IMainRoleAndRoleQueryRepo, MainRoleAndRoleQueryRepository>();
+
+                    services.AddScoped<IAppUserAndCompanyCommandRepo, AppUserAndCompanyCommandRepository>();
+                    services.AddScoped<IAppUserAndCompanyQueryRepo, AppUserAndCompanyQueryRepository>();
+
+                    services.AddScoped<IMainRoleAndUserCommandRepo, MainRoleAndUserCommandRepository>();
+                    services.AddScoped<IMainRoleAndUserQueryRepo, MainRoleAndUserQueryRepository>();
+                 
             #endregion
 
             #endregion
