@@ -19,6 +19,7 @@ namespace OMPS.PersistanceKatmani.Context
         public DbSet<AppUserAndCompany> AppUserAndCompanies { get; set; }
         public DbSet<MainRole> MainRoles { get; set; }
         public DbSet<MainRoleAndRoleRelationship> MainRoleAndRoleRelationships { get; set; }
+        public DbSet<MainRoleAndUserRelationship> MainRoleAndUserRelationships { get; set; }
         #endregion
 
 

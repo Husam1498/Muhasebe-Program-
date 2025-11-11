@@ -6,6 +6,19 @@ namespace OMPS.DomainKatmani.AppEntities;
 
 public sealed class MainRoleAndUserRelationship:Entity
 {
+    public MainRoleAndUserRelationship()
+    {
+        
+    }
+
+    public MainRoleAndUserRelationship(
+        string id,string userId, string mainRoleId, string companyId): base(id)
+    {
+        UserId = userId;
+        MainRoleId = mainRoleId;
+        CompanyId = companyId;
+    }
+
     [ForeignKey(nameof(AppRole))]
     public string  UserId { get; set; }
     public AppUser AppUser { get; set; }

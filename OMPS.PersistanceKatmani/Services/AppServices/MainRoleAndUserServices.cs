@@ -1,38 +1,49 @@
 ﻿using OMPS.ApplicationKatmanı.Services.AppServices;
 using OMPS.DomainKatmani.AppEntities;
+using OMPS.DomainKatmani.Repository.AppDbContext.MainRoleAndUserRepositories;
+using OMPS.DomainKatmani.UnitOfWorks;
 
 namespace OMPS.PersistanceKatmani.Services.AppServices
 {
     public sealed class MainRoleAndUserServices : IMainRoleAndUserServices
     {
-        public Task CreateAsync(MainRoleAndUserRelationship role, CancellationToken cancellationToken)
+        private readonly IMainRoleAndUserCommandRepo _commandRepo;
+        private readonly IMainRoleAndUserQueryRepo _queryRepo;
+        private readonly IAppUnitOfWorks _unitOfWorks;
+
+        public MainRoleAndUserServices(IMainRoleAndUserCommandRepo commandRepo,
+            IMainRoleAndUserQueryRepo queryRepo, IAppUnitOfWorks unitOfWorks)
         {
-            throw new NotImplementedException();
+            _commandRepo = commandRepo;
+            _queryRepo = queryRepo;
+            _unitOfWorks = unitOfWorks;
         }
 
-        public IQueryable<MainRoleAndUserRelationship> GetAll()
+        public async Task CreateAsync(MainRoleAndUserRelationship role, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _commandRepo.AddAsync(role, cancellationToken);
+            await _unitOfWorks.SaveChangesAsync(cancellationToken);
         }
 
-        public Task<MainRoleAndUserRelationship> GetByIdAsync(string id)
+        public async Task<MainRoleAndUserRelationship> GetById(string id)
         {
-            throw new NotImplementedException();
+            return await _queryRepo.GetById(id);
         }
 
-        public Task<MainRoleAndUserRelationship> GetByRoleIdAndMainRoleId(string roleId, string mainRoleId, CancellationToken cancellationToken = default)
+        public async Task<MainRoleAndUserRelationship> GetByUserIdCompanyIdAndRoleIdAsync(
+            string userId, string companyId, string mainRoleId,
+            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _queryRepo.GetFirstByExpression(
+                p => p.UserId == userId && p.CompanyId == companyId && p.MainRoleId == mainRoleId,
+                cancellationToken
+                );
         }
 
-        public Task RemoveByIdAsync(string id)
+        public async Task RemoveByIdAsync(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(MainRoleAndUserRelationship role)
-        {
-            throw new NotImplementedException();
+            await _commandRepo.RemoveById(id);
+            await _unitOfWorks.SaveChangesAsync();
         }
     }
 }
